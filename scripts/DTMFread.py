@@ -43,8 +43,8 @@ def calculate_coefficient(dataSample, freq):
     a = 0
     b = 0
     for i in range(len(dataSample)):
-        a += 
-        b += 
+        a +=
+        b +=
     return sqrt(a**2 + b**2)
 
 def decode_freqs(low_freq, high_freq):
@@ -53,8 +53,8 @@ def decode_freqs(low_freq, high_freq):
 sliced_data = slice_data()
 
 for signal in sliced_data:
-    
+
     print(decode_freqs( ))
-    
+
 #plt.plot(range(0, length), save_data)
 #plt.show()
