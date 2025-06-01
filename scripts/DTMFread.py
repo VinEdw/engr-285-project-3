@@ -1,6 +1,6 @@
 # Program to read in and decode DTMF sound data from a .wav file
 
-from numpy import *
+import numpy as np
 import matplotlib.pyplot as plt # Necessary if you want to plot the waveform (commented out lines at the end)
 import wave # Necessary for reading the .wav file
 import struct # Necessary for reading the .wav file
@@ -48,9 +48,9 @@ def calculate_coefficient(data_sample, freq):
     for i in range(N):
         y = data_sample[i]
         t = i / framerate
-        a += y * cos(2 * pi * freq * t)
-        b += y * sin(2 * pi * freq * t)
-    return 2/N * sqrt(a**2 + b**2)
+        a += y * np.cos(2 * np.pi * freq * t)
+        b += y * np.sin(2 * np.pi * freq * t)
+    return 2/N * np.sqrt(a**2 + b**2)
 
 def decode_freqs(low_freq, high_freq):
     return decode_matrix[low_frequencies.index(low_freq)][high_frequencies.index(high_freq)]
@@ -60,8 +60,8 @@ sliced_data = slice_data()
 for signal in sliced_data:
     low_coeffs = [calculate_coefficient(signal, freq) for freq in low_frequencies]
     high_coeffs = [calculate_coefficient(signal, freq) for freq in high_frequencies]
-    low_freq = low_frequencies[argmax(low_coeffs)]
-    high_freq = high_frequencies[argmax(high_coeffs)]
+    low_freq = low_frequencies[np.argmax(low_coeffs)]
+    high_freq = high_frequencies[np.argmax(high_coeffs)]
 
     print(decode_freqs(low_freq, high_freq), end="")
 
@@ -70,7 +70,7 @@ print()
 fig, ax = plt.subplots()
 ax.set(ylabel="$y$", xlabel="$t$ (s)")
 
-time = arange(length) / framerate
+time = np.arange(length) / framerate
 ax.plot(time, save_data)
 
 fig.savefig(plot_name)
