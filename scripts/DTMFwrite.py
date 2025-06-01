@@ -1,6 +1,6 @@
 #Program to encode a sequence of single digits into a DTMF sound (written to a .wav file)
 
-import numpy
+import numpy as np
 import wave #Necessary for writing the .wav file
 import struct #Necessary for writing the .wav file
 
@@ -14,7 +14,7 @@ soundLength = 400
 pauseLength = 200
 
 def createPureToneData(freq):
-    return numpy.array([soundLevel/2 * numpy.sin(2.0 * numpy.pi * freq * x / sampleRate) for x in range(0, sampleRate)]).astype(numpy.int16)
+    return np.array([soundLevel/2 * np.sin(2.0 * np.pi * freq * x / sampleRate) for x in range(0, sampleRate)]).astype(np.int16)
 
 array697 = createPureToneData(697)
 array770 = createPureToneData(770)
