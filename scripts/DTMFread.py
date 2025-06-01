@@ -26,13 +26,13 @@ decode_matrix = [[1,2,3],[4,5,6],[7,8,9],[-1,0,-1]]
 def slice_data():
     i = 0
     data_list = []
+    streak_length = 2
     while i < length:
-        if save_data[i] == 0:
+        if not any(save_data[i:i+streak_length]):
             i += 1
         else:
             j = 0
             current_signal = []
-            streak_length = 2
             while any(save_data[i+j:i+j+streak_length]):
                 current_signal.append(save_data[i+j])
                 j += 1
