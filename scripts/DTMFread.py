@@ -6,7 +6,7 @@ import wave #Necessary for reading the .wav file
 import struct #Necessary for reading the .wav file
 
 #These first few blocks read in the .wav file to an ordinary integer data list
-fileName = "EncodedSound.wav"
+fileName = "media/TestSignals/TenDigits.wav"
 
 wavefile = wave.open(fileName, 'r')
 
