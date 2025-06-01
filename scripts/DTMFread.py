@@ -57,8 +57,14 @@ def decode_freqs(low_freq, high_freq):
 sliced_data = slice_data()
 
 for signal in sliced_data:
+    low_coeffs = [calculate_coefficient(signal, freq) for freq in low_frequencies]
+    high_coeffs = [calculate_coefficient(signal, freq) for freq in high_frequencies]
+    low_freq = low_frequencies[argmax(low_coeffs)]
+    high_freq = high_frequencies[argmax(high_coeffs)]
 
-    print(decode_freqs( ))
+    print(decode_freqs(low_freq, high_freq), end="")
+
+print()
 
 #plt.plot(range(0, length), save_data)
 #plt.show()
