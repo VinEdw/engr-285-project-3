@@ -14,7 +14,14 @@ sound_length = 400
 pause_length = 200
 
 def create_pure_tone_data(freq):
-    return np.array([sound_level/2 * np.sin(2.0 * np.pi * freq * x / sample_rate) for x in range(0, sample_rate)]).astype(np.int16)
+    data = []
+    amplitude = sound_level / 2
+    omega = 2.0 * np.pi * freq
+    for x in range(sample_rate):
+        angle = omega * x / sample_rate
+        value = amplitude * np.sin(angle)
+        data.append(value)
+    return np.array(data, dtype="int16")
 
 array697 = create_pure_tone_data(697)
 array770 = create_pure_tone_data(770)
