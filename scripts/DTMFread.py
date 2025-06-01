@@ -1,11 +1,11 @@
-#Program to read in and decode DTMF sound data from a .wav file
+# Program to read in and decode DTMF sound data from a .wav file
 
 from numpy import *
-import matplotlib.pyplot as plt #Necessary if you want to plot the waveform (commented out lines at the end)
-import wave #Necessary for reading the .wav file
-import struct #Necessary for reading the .wav file
+import matplotlib.pyplot as plt # Necessary if you want to plot the waveform (commented out lines at the end)
+import wave # Necessary for reading the .wav file
+import struct # Necessary for reading the .wav file
 
-#These first few blocks read in the .wav file to an ordinary integer data list
+# These first few blocks read in the .wav file to an ordinary integer data list
 fileName = "media/TestSignals/TenDigits.wav"
 plotName = "media/TenDigitsPlot.svg"
 
@@ -18,7 +18,7 @@ for i in range(0, length):
     wavedata = wavefile.readframes(1)
     data = struct.unpack("<h", wavedata)
     save_data.append(int(data[0]))
-#At this point the sound data is saved in the save_data variable
+# At this point the sound data is saved in the save_data variable
 
 low_frequencies = [697, 770, 852, 941]
 high_frequencies = [1209, 1336, 1477]

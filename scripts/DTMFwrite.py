@@ -1,12 +1,12 @@
-#Program to encode a sequence of single digits into a DTMF sound (written to a .wav file)
+# Program to encode a sequence of single digits into a DTMF sound (written to a .wav file)
 
 import numpy as np
-import wave #Necessary for writing the .wav file
-import struct #Necessary for writing the .wav file
+import wave # Necessary for writing the .wav file
+import struct # Necessary for writing the .wav file
 
-fileName = "media/TestSignals/TenDigits.wav" #Output file name (must include .wav)
+fileName = "media/TestSignals/TenDigits.wav" # Output file name (must include .wav)
 
-numberList = [0,1,2,3,4,5,6,7,8,9] #List of digits (0-9) to be encoded into sound
+numberList = [0,1,2,3,4,5,6,7,8,9] # List of digits (0-9) to be encoded into sound
 
 sampleRate = 44100
 soundLevel = 4096
@@ -31,10 +31,10 @@ for i in range(len(numberList)):
     soundData += toneList[numberList[i]][:int(sampleRate*soundLength/1000)]
     soundData += [0] * int(sampleRate*pauseLength/1000)
 
-#Start to write the .wav file
+# Start to write the .wav file
 wav_file = wave.open(fileName, "w")
 
-#Parameters for the .wav file
+# Parameters for the .wav file
 nchannels = 1
 sampwidth = 2
 framerate = int(sampleRate)
@@ -45,10 +45,10 @@ compname = "not compressed"
 wav_file.setparams((nchannels, sampwidth, framerate, nframes,
     comptype, compname))
 
-#Write the data to the file
+# Write the data to the file
 for s in soundData:
     wav_file.writeframes(struct.pack('h', int(s)))
 
-wav_file.close() #Finish writing the .wav file
+wav_file.close() # Finish writing the .wav file
 
 print("Writing " + fileName + " complete!")
