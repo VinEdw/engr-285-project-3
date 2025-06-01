@@ -40,24 +40,22 @@ def slice_data():
             i += j + 1
     return data_list
 
-data_list = slice_data()
+def calculate_coefficient(dataSample, freq):
+    a = 0
+    b = 0
+    for i in range(len(dataSample)):
+        a +=
+        b +=
+    return sqrt(a**2 + b**2)
 
-#def calculate_coefficient(dataSample, freq):
-#    a = 0
-#    b = 0
-#    for i in range(len(dataSample)):
-#        a +=
-#        b +=
-#    return sqrt(a**2 + b**2)
+def decode_freqs(low_freq, high_freq):
+    return decode_matrix[low_frequencies.index(low_freq)][high_frequencies.index(high_freq)]
 
-#def decode_freqs(low_freq, high_freq):
-#    return decode_matrix[low_frequencies.index(low_freq)][high_frequencies.index(high_freq)]
+sliced_data = slice_data()
 
-#sliced_data = slice_data()
+for signal in sliced_data:
 
-#for signal in sliced_data:
+    print(decode_freqs( ))
 
-#    print(decode_freqs( ))
-
-##plt.plot(range(0, length), save_data)
-##plt.show()
+#plt.plot(range(0, length), save_data)
+#plt.show()
