@@ -53,7 +53,9 @@ def calculate_coefficient(data_sample, freq):
     return 2/N * np.sqrt(a**2 + b**2)
 
 def decode_freqs(low_freq, high_freq):
-    return decode_matrix[low_frequencies.index(low_freq)][high_frequencies.index(high_freq)]
+    low_idx = low_frequencies.index(low_freq)
+    high_idx = high_frequencies.index(high_freq)
+    return decode_matrix[low_idx][high_idx]
 
 sliced_data = slice_data()
 
