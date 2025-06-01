@@ -4,41 +4,41 @@ import numpy as np
 import wave # Necessary for writing the .wav file
 import struct # Necessary for writing the .wav file
 
-fileName = "media/TestSignals/TenDigits.wav" # Output file name (must include .wav)
+file_name = "media/TestSignals/TenDigits.wav" # Output file name (must include .wav)
 
-numberList = [0,1,2,3,4,5,6,7,8,9] # List of digits (0-9) to be encoded into sound
+number_list = [0,1,2,3,4,5,6,7,8,9] # List of digits (0-9) to be encoded into sound
 
-sampleRate = 44100
-soundLevel = 4096
-soundLength = 400
-pauseLength = 200
+sample_rate = 44100
+sound_level = 4096
+sound_length = 400
+pause_length = 200
 
-def createPureToneData(freq):
-    return np.array([soundLevel/2 * np.sin(2.0 * np.pi * freq * x / sampleRate) for x in range(0, sampleRate)]).astype(np.int16)
+def create_pure_tone_data(freq):
+    return np.array([sound_level/2 * np.sin(2.0 * np.pi * freq * x / sample_rate) for x in range(0, sample_rate)]).astype(np.int16)
 
-array697 = createPureToneData(697)
-array770 = createPureToneData(770)
-array852 = createPureToneData(852)
-array941 = createPureToneData(941)
-array1209 = createPureToneData(1209)
-array1336 = createPureToneData(1336)
-array1477 = createPureToneData(1477)
+array697 = create_pure_tone_data(697)
+array770 = create_pure_tone_data(770)
+array852 = create_pure_tone_data(852)
+array941 = create_pure_tone_data(941)
+array1209 = create_pure_tone_data(1209)
+array1336 = create_pure_tone_data(1336)
+array1477 = create_pure_tone_data(1477)
 
-toneList = [sum([array941,array1336]).tolist(),sum([array697,array1209]).tolist(),sum([array697,array1336]).tolist(),sum([array697,array1477]).tolist(),sum([array770,array1209]).tolist(),sum([array770,array1336]).tolist(),sum([array770,array1477]).tolist(),sum([array852,array1209]).tolist(),sum([array852,array1336]).tolist(),sum([array852,array1477]).tolist()]
+tone_list = [sum([array941,array1336]).tolist(),sum([array697,array1209]).tolist(),sum([array697,array1336]).tolist(),sum([array697,array1477]).tolist(),sum([array770,array1209]).tolist(),sum([array770,array1336]).tolist(),sum([array770,array1477]).tolist(),sum([array852,array1209]).tolist(),sum([array852,array1336]).tolist(),sum([array852,array1477]).tolist()]
 
-soundData = []
-for i in range(len(numberList)):
-    soundData += toneList[numberList[i]][:int(sampleRate*soundLength/1000)]
-    soundData += [0] * int(sampleRate*pauseLength/1000)
+sound_data = []
+for i in range(len(number_list)):
+    sound_data += tone_list[number_list[i]][:int(sample_rate*sound_length/1000)]
+    sound_data += [0] * int(sample_rate*pause_length/1000)
 
 # Start to write the .wav file
-wav_file = wave.open(fileName, "w")
+wav_file = wave.open(file_name, "w")
 
 # Parameters for the .wav file
 nchannels = 1
 sampwidth = 2
-framerate = int(sampleRate)
-nframes = (int(sampleRate*soundLength/1000)+int(sampleRate*pauseLength/1000))*len(numberList)
+framerate = int(sample_rate)
+nframes = (int(sample_rate*sound_length/1000)+int(sample_rate*pause_length/1000))*len(number_list)
 comptype = "NONE"
 compname = "not compressed"
 
@@ -46,9 +46,9 @@ wav_file.setparams((nchannels, sampwidth, framerate, nframes,
     comptype, compname))
 
 # Write the data to the file
-for s in soundData:
+for s in sound_data:
     wav_file.writeframes(struct.pack('h', int(s)))
 
 wav_file.close() # Finish writing the .wav file
 
-print("Writing " + fileName + " complete!")
+print("Writing " + file_name + " complete!")

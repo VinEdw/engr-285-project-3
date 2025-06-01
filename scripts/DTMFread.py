@@ -6,10 +6,10 @@ import wave # Necessary for reading the .wav file
 import struct # Necessary for reading the .wav file
 
 # These first few blocks read in the .wav file to an ordinary integer data list
-fileName = "media/TestSignals/TenDigits.wav"
-plotName = "media/TenDigitsPlot.svg"
+file_name = "media/TestSignals/TenDigits.wav"
+plot_name = "media/TenDigitsPlot.svg"
 
-wavefile = wave.open(fileName, 'r')
+wavefile = wave.open(file_name, 'r')
 
 length = wavefile.getnframes()
 framerate = wavefile.getframerate()
@@ -41,12 +41,12 @@ def slice_data():
             i += j + 1
     return data_list
 
-def calculate_coefficient(dataSample, freq):
+def calculate_coefficient(data_sample, freq):
     a = 0
     b = 0
-    N = len(dataSample)
+    N = len(data_sample)
     for i in range(N):
-        y = dataSample[i]
+        y = data_sample[i]
         t = i / framerate
         a += y * cos(2 * pi * freq * t)
         b += y * sin(2 * pi * freq * t)
@@ -73,4 +73,4 @@ ax.set(ylabel="$y$", xlabel="$t$ (s)")
 time = arange(length) / framerate
 ax.plot(time, save_data)
 
-fig.savefig(plotName)
+fig.savefig(plot_name)
