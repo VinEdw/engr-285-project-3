@@ -43,10 +43,13 @@ def slice_data():
 def calculate_coefficient(dataSample, freq):
     a = 0
     b = 0
-    for i in range(len(dataSample)):
-        a +=
-        b +=
-    return sqrt(a**2 + b**2)
+    N = len(dataSample)
+    for i in range(N):
+        y = dataSample[i]
+        t = i / framerate
+        a += y * cos(2 * pi * freq * t)
+        b += y * sin(2 * pi * freq * t)
+    return 2/N * sqrt(a**2 + b**2)
 
 def decode_freqs(low_freq, high_freq):
     return decode_matrix[low_frequencies.index(low_freq)][high_frequencies.index(high_freq)]
