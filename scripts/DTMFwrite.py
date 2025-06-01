@@ -6,7 +6,7 @@ import struct #Necessary for writing the .wav file
 
 fileName = "EncodedSound.wav" #Output file name (must include .wav)
 
-numberList = [1,1,2,1,0,1] #List of digits (0-9) to be encoded into sound
+numberList = [1,2,3,4,5,6,7,8,9,0] #List of digits (0-9) to be encoded into sound
 
 sampleRate = 44100
 soundLevel = 4096
