@@ -19,11 +19,11 @@
 
 = Encoding Program
 
+#py_script("DTMFwrite", put_fname: true)
+
 = Decoding Program
 
-== `slice_data()`
-
-== `calculate_coefficient()`
+#py_script("DTMFread", put_fname: true)
 
 = Extension
 
