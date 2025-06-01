@@ -27,34 +27,37 @@ def slice_data():
     i = 0
     data_list = []
     while i < length:
-        if save_data[i] :
+        if save_data[i] == 0:
             i += 1
         else:
             j = 0
             current_signal = []
-            while :
+            streak_length = 2
+            while any(save_data[i+j:i+j+streak_length]):
                 current_signal.append(save_data[i+j])
                 j += 1
             data_list.append(current_signal)
             i += j + 1
     return data_list
 
-def calculate_coefficient(dataSample, freq):
-    a = 0
-    b = 0
-    for i in range(len(dataSample)):
-        a +=
-        b +=
-    return sqrt(a**2 + b**2)
+data_list = slice_data()
 
-def decode_freqs(low_freq, high_freq):
-    return decode_matrix[low_frequencies.index(low_freq)][high_frequencies.index(high_freq)]
+#def calculate_coefficient(dataSample, freq):
+#    a = 0
+#    b = 0
+#    for i in range(len(dataSample)):
+#        a +=
+#        b +=
+#    return sqrt(a**2 + b**2)
 
-sliced_data = slice_data()
+#def decode_freqs(low_freq, high_freq):
+#    return decode_matrix[low_frequencies.index(low_freq)][high_frequencies.index(high_freq)]
 
-for signal in sliced_data:
+#sliced_data = slice_data()
 
-    print(decode_freqs( ))
+#for signal in sliced_data:
 
-#plt.plot(range(0, length), save_data)
-#plt.show()
+#    print(decode_freqs( ))
+
+##plt.plot(range(0, length), save_data)
+##plt.show()
