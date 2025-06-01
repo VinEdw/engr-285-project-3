@@ -7,6 +7,7 @@ import struct #Necessary for reading the .wav file
 
 #These first few blocks read in the .wav file to an ordinary integer data list
 fileName = "media/TestSignals/TenDigits.wav"
+plotName = "media/TenDigitsPlot.svg"
 
 wavefile = wave.open(fileName, 'r')
 
@@ -66,5 +67,10 @@ for signal in sliced_data:
 
 print()
 
-#plt.plot(range(0, length), save_data)
-#plt.show()
+fig, ax = plt.subplots()
+ax.set(ylabel="$y$", xlabel="$t$ (s)")
+
+time = arange(length) / framerate
+ax.plot(time, save_data)
+
+fig.savefig(plotName)
