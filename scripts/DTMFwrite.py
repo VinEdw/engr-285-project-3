@@ -13,11 +13,14 @@ sound_level = 4096
 sound_length = 400
 pause_length = 200
 
+sound_samples = sample_rate * sound_length // 1000
+pause_samples = sample_rate * pause_length // 1000
+
 def create_pure_tone_data(freq):
     data = []
     amplitude = sound_level / 2
     omega = 2.0 * np.pi * freq
-    for x in range(sample_rate):
+    for x in range(sound_samples):
         angle = omega * x / sample_rate
         value = amplitude * np.sin(angle)
         data.append(value)
@@ -35,8 +38,8 @@ tone_list = [sum([array941,array1336]).tolist(),sum([array697,array1209]).tolist
 
 sound_data = []
 for i in range(len(number_list)):
-    sound_data += tone_list[number_list[i]][:int(sample_rate*sound_length/1000)]
-    sound_data += [0] * int(sample_rate*pause_length/1000)
+    sound_data += tone_list[number_list[i]]
+    sound_data += [0] * pause_samples
 
 # Start to write the .wav file
 wav_file = wave.open(file_name, "w")
@@ -45,7 +48,7 @@ wav_file = wave.open(file_name, "w")
 nchannels = 1
 sampwidth = 2
 framerate = int(sample_rate)
-nframes = (int(sample_rate*sound_length/1000)+int(sample_rate*pause_length/1000))*len(number_list)
+nframes = (sound_samples + pause_samples) * len(number_list)
 comptype = "NONE"
 compname = "not compressed"
 
