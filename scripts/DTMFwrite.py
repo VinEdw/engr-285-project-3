@@ -11,9 +11,11 @@ number_list = [0,1,2,3,4,5,6,7,8,9] # List of digits (0-9) to be encoded into so
 
 sample_rate = 44100
 sound_level = 4096
+# Set the sound and pause lengths in milliseconds
 sound_length = 400
 pause_length = 200
 
+# Use the sound/pause lengths and sample rate to calculate how many samples are need for each
 sound_samples = sample_rate * sound_length // 1000
 pause_samples = sample_rate * pause_length // 1000
 
@@ -29,14 +31,16 @@ def create_pure_tone_data(freq):
 
 pure_tone_data = {freq: create_pure_tone_data(freq) for freq in (freqs.low + freqs.high)}
 
+# Create a list that maps digits to their corresponding dual tone
 tone_list = [[]] * 10
 for digit in range(10):
     low_freq, high_freq = freqs.encode_list[digit]
     tone_list[digit] = (pure_tone_data[low_freq] + pure_tone_data[high_freq]).tolist()
 
+# Create a list with the tone and pause for each digit of the number list
 sound_data = []
-for i in range(len(number_list)):
-    sound_data += tone_list[number_list[i]]
+for digit in number_list:
+    sound_data += tone_list[digit]
     sound_data += [0] * pause_samples
 
 # Start to write the .wav file
