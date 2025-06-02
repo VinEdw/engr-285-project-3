@@ -1,5 +1,6 @@
 # Program to encode a sequence of single digits into a DTMF sound (written to a .wav file)
 
+import DTMFfrequencies as freqs
 import numpy as np
 import wave # Necessary for writing the .wav file
 import struct # Necessary for writing the .wav file
@@ -26,15 +27,12 @@ def create_pure_tone_data(freq):
         data.append(value)
     return np.array(data, dtype="int16")
 
-array697 = create_pure_tone_data(697)
-array770 = create_pure_tone_data(770)
-array852 = create_pure_tone_data(852)
-array941 = create_pure_tone_data(941)
-array1209 = create_pure_tone_data(1209)
-array1336 = create_pure_tone_data(1336)
-array1477 = create_pure_tone_data(1477)
+pure_tone_data = {freq: create_pure_tone_data(freq) for freq in (freqs.low + freqs.high)}
 
-tone_list = [sum([array941,array1336]).tolist(),sum([array697,array1209]).tolist(),sum([array697,array1336]).tolist(),sum([array697,array1477]).tolist(),sum([array770,array1209]).tolist(),sum([array770,array1336]).tolist(),sum([array770,array1477]).tolist(),sum([array852,array1209]).tolist(),sum([array852,array1336]).tolist(),sum([array852,array1477]).tolist()]
+tone_list = [[]] * 10
+for digit in range(10):
+    low_freq, high_freq = freqs.encode_list[digit]
+    tone_list[digit] = (pure_tone_data[low_freq] + pure_tone_data[high_freq]).tolist()
 
 sound_data = []
 for i in range(len(number_list)):
