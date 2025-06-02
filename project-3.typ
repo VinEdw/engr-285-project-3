@@ -17,6 +17,10 @@
 #outline()
 #pagebreak()
 
+= DTMF Description
+
+#py_script("DTMFfrequencies", put_fname: true, put_output: false)
+
 = Encoding Program
 
 #py_script("DTMFwrite", put_fname: true)
