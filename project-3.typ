@@ -29,5 +29,5 @@
 
 #py_script("DTMFread", put_fname: true)
 
-= Extension
+= Sending Alphanumeric Messages
 
