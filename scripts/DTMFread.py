@@ -1,5 +1,6 @@
 # Program to read in and decode DTMF sound data from a .wav file
 
+import DTMFfrequencies as freqs
 import numpy as np
 import matplotlib.pyplot as plt # Necessary if you want to plot the waveform (commented out lines at the end)
 import wave # Necessary for reading the .wav file
@@ -19,10 +20,6 @@ for i in range(0, length):
     data = struct.unpack("<h", wavedata)
     save_data.append(int(data[0]))
 # At this point the sound data is saved in the save_data variable
-
-low_frequencies = [697, 770, 852, 941]
-high_frequencies = [1209, 1336, 1477]
-decode_matrix = [[1,2,3],[4,5,6],[7,8,9],[-1,0,-1]]
 
 def slice_data():
     i = 0
@@ -53,17 +50,17 @@ def calculate_coefficient(data_sample, freq):
     return 2/N * np.sqrt(a**2 + b**2)
 
 def decode_freqs(low_freq, high_freq):
-    low_idx = low_frequencies.index(low_freq)
-    high_idx = high_frequencies.index(high_freq)
-    return decode_matrix[low_idx][high_idx]
+    low_idx = freqs.low.index(low_freq)
+    high_idx = freqs.high.index(high_freq)
+    return freqs.decode_matrix[low_idx][high_idx]
 
 sliced_data = slice_data()
 
 for signal in sliced_data:
-    low_coeffs = [calculate_coefficient(signal, freq) for freq in low_frequencies]
-    high_coeffs = [calculate_coefficient(signal, freq) for freq in high_frequencies]
-    low_freq = low_frequencies[np.argmax(low_coeffs)]
-    high_freq = high_frequencies[np.argmax(high_coeffs)]
+    low_coeffs = [calculate_coefficient(signal, freq) for freq in freqs.low]
+    high_coeffs = [calculate_coefficient(signal, freq) for freq in freqs.high]
+    low_freq = freqs.low[np.argmax(low_coeffs)]
+    high_freq = freqs.high[np.argmax(high_coeffs)]
 
     print(decode_freqs(low_freq, high_freq), end="")
 
