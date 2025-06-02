@@ -21,6 +21,7 @@ for i in range(0, length):
     save_data.append(int(data[0]))
 # At this point the sound data is saved in the save_data variable
 
+# Slice up the save data into a list of each individual DTMF signal without pauses
 def slice_data():
     i = 0
     data_list = []
@@ -38,6 +39,7 @@ def slice_data():
             i += j + 1
     return data_list
 
+# Calculate the approximate Fourier coefficient of the input signal data for the given frequency
 def calculate_coefficient(data_sample, freq):
     a = 0
     b = 0
@@ -49,6 +51,7 @@ def calculate_coefficient(data_sample, freq):
         b += y * np.sin(2 * np.pi * freq * t)
     return 2/N * np.sqrt(a**2 + b**2)
 
+# Decode the given low and high frequencies to the corresponding digit
 def decode_freqs(low_freq, high_freq):
     low_idx = freqs.low.index(low_freq)
     high_idx = freqs.high.index(high_freq)
@@ -56,6 +59,8 @@ def decode_freqs(low_freq, high_freq):
 
 sliced_data = slice_data()
 
+# For each signal in the sliced data, find the dominant low and high frequencies
+# Print the corresponding digit for each
 for signal in sliced_data:
     low_coeffs = [calculate_coefficient(signal, freq) for freq in freqs.low]
     high_coeffs = [calculate_coefficient(signal, freq) for freq in freqs.high]
@@ -63,9 +68,9 @@ for signal in sliced_data:
     high_freq = freqs.high[np.argmax(high_coeffs)]
 
     print(decode_freqs(low_freq, high_freq), end="")
-
 print()
 
+# Plot the save data over time
 fig, ax = plt.subplots()
 ax.set(ylabel="$y$", xlabel="$t$ (s)")
 
