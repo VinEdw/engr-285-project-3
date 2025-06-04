@@ -13,7 +13,7 @@
 #figure(
   caption: [Finding Fourier Coefficients Demo],
   image("media/fourier_transform_demo.svg", width: 80%),
-)
+) <fourier_transfrom_demo>
 
 // Table of contents
 #pagebreak()
