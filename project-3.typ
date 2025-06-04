@@ -244,7 +244,7 @@ C = n_1 n_2
 $
 If the goal is to be able to send digits and uncased letters, then $26 + 10 = 36$ characters are needed and it is required that $n_1 n_2 >= 36$.
 One possible choice for $n_1$ and $n_2$ is $n_1 = n_2 = 6$.
-If the goal is to also include characters such as spaces, commas, and periods, then $n_1$ or $n_2$ can be increased to 7, giving 42 possible characters. 
+If the goal is to also include characters such as spaces, commas, and periods, then $n_1$ or $n_2$ can be increased to 7, giving 42 possible characters.
 
 Another technique that could be used is mapping sequences of preliminary characters to different characters.
 Each frequency pair would correspond to a specific preliminary character as in the previous technique.
