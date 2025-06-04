@@ -108,6 +108,12 @@ Lastly, the function returns the data in a Numpy array of 16 bit signed integers
 Using the `create_pure_tone_data()` function, a dictionary comprehension was used to create a dictionary that maps each low and high frequency to its pure tone data.
 By pre-generating the data like this, the program does not have to calculate the same data multiple times for a frequency.
 
+== Generating Dual Tones
+
+Afterwards, a list was created to map each digit to its dual tone data.
+`encode_dict` was used from `DTMFfrequencies.py` to get the low and high frequencies corresponding to the each digit.
+The pure tone data for those component frequencies were then added together to get one dual tone signal for each digit.
+
 #py_script("DTMFwrite", put_fname: true)
 
 = Decoding Program
