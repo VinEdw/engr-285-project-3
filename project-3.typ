@@ -10,7 +10,10 @@
   date: datetime(year: 2025, month: 6, day: 10),
 )
 
-// #image("media/thumbnail.svg")
+#figure(
+  caption: [Finding Fourier Coefficients Demo],
+  image("media/fourier_transform_demo.svg", width: 80%),
+)
 
 // Table of contents
 #pagebreak()
