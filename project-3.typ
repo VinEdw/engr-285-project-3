@@ -147,6 +147,26 @@ The program then opens the `.wav` file and saves relevant metadata such as the `
 Next, it reads the signal data and saves it in the `save_data` list.
 With the data extracted from the `.wav` file, various functions are defined afterward.
 
+== `slice_data()`
+
+The `slice_data()` function is used to break up the entire signal into each dual tone that makes it up.
+@test_signal_plot depicts the plot for a test signal consisting of 10 digits (0--9).
+Notice that each dual tone rapidly oscillates in what looks like a block at this scale.
+While these dual tones cross 0, they are rarely equal to 0 for multiple consecutive samples.
+The only moments where the signal is 0 for consecutive samples is during the pause between each sample.
+Thus, by looking for locations in the data where the value is 0 for consecutive samples, the signal can be broken up into each dual tone, removing the pauses.
+
+The function does this by walking through the `save_data`, marking the position using `i`.
+If it sees two consecutive 0 values, it assumes it is in a pause and continues walking.
+Otherwise, it keeps the `i` marker in place and starts incrementing an offset marker `j`, walking through the signal and saving the data to the `current_signal` list so long as it does not see two consecutive 0 values.
+Once the `current_signal` is finished, the list is appended to the `data_list` and `i` in increased by the offset `j` plus 1.
+The end result is a list of lists containing the data for each dual tone.
+
+#figure(
+  caption: [Test Signal Plot (10 Digits)],
+  image("media/TenDigitsPlot.svg"),
+) <test_signal_plot>
+
 #py_script("DTMFread", put_fname: true)
 
 = Handling More Complicated Messages
