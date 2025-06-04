@@ -215,6 +215,11 @@ These summations were implemented in the function to approximate the Fourier coe
 For the given signal segment, the function loops through all the sample points, adding up each of their contributions to the summation.
 Finally, these summations are added in quadrature and scaled by their common factor $2/N$.
 
+== Signal Plot
+
+Finally, the program plots the entire signal over time and saves the figure to the desired `plot_name`.
+Note that @sample_to_time was used to convert sample number to time.
+
 #py_script("DTMFread", put_fname: true)
 
 = Handling More Complicated Messages
