@@ -23,7 +23,7 @@
 = DTMF Description
 
 Dual-tone multi-frequency signals (DTMF) combine two pure tone sinusoids as a method of encoding or decoding digital information.
-This was first developed by the Bell System in 1963 and is commonly known as "Touch-Tone", and it was used in push-button telephones.
+This was first developed by the Bell System in 1963, commonly known as "Touch-Tone", and it was used in push-button telephones.
 Each digit corresponds to a unique combination of one high frequency and one low frequency.
 @digit_encoding_scheme shows the low frequency in the first column and the high frequency in the first row associated with each digit from 0 to 9.
 For this project's objectives, only numbers 0 to 9 were used.
