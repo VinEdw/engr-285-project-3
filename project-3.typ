@@ -264,7 +264,7 @@ This technique has the advantage of not requiring any new frequencies, thought i
 
 A third technique that could be used is introducing additional sets of frequencies, perhaps higher or lower than the current sets.
 If $k$ frequency sets are used in total, then each character in the message would consist of $k$ pure sinusoids.
-In order for the combined signal to have a maximum amplitude equal to `sound_level`, the individual sinusoids would need their amplitude set equal to the `sound_level / k`.
+In order for the combined signal to have an amplitude equal to `sound_level`, the individual sinusoids would need their amplitude set equal to the `sound_level / k`.
 Next, each of these new frequency sets would need to have their list of frequencies stored in a variable.
 To make all these frequency lists easier to manage, perhaps they could be put in a list.
 That way, the program could loop over the frequencies in each frequency list.
