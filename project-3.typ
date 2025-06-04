@@ -134,6 +134,19 @@ This same sample file is later used in the decoding program.
 
 = Decoding Program
 
+`DTMFread.py` is used to read `.wav` files created by `DTMFwrite.py`.
+It decodes the digits encoded in the DTMF signal and prints them out.
+Lastly, it creates a plot of the signal over time.
+
+The program starts by importing necessary packages.
+Next, there are multiple variables that the user is free to set to adjust the behavior of the script.
+These variables include the following:
+- `file_name`: file location to read the `.wav` file
+- `plot_name`: file location to save the plot
+The program then opens the `.wav` file and saves relevant metadata such as the `framerate` and `length` in frames
+Next, it reads the signal data and saves it in the `save_data` list.
+With the data extracted from the `.wav` file, various functions are defined afterward.
+
 #py_script("DTMFread", put_fname: true)
 
 = Handling More Complicated Messages
