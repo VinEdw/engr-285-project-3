@@ -223,6 +223,17 @@ Those indices are then used to select the digit from the `decode_matrix`.
 
 == Main Loop
 
+@fourier_transfrom_demo depicts a dual tone consisting of a 2 Hz signal combined with a 5 Hz signal, followed by a plot of the approximate Fourier coefficient described by @fourier_coefficient for various frequencies $nu$.
+Notice that the Fourier coefficient is greatest for the component frequencies of 2 Hz and 5 Hz.
+Thus, by finding the Fourier coefficient for each low and high frequency used in @digit_encoding_scheme, it can be deduced which two frequencies were used to create the dual tone.
+
+The main loop of the program first finds the Fourier coefficient for each low frequency using the `calculate_coefficients()` function.
+Then, it does the same thing for each high frequency.
+These coefficients are saved in two lists.
+Next, the Numpy function `argmax()` is used to find the index in each list where the coefficient is greatest, and that index is used to grab the corresponding frequency.
+With the `low_freq` and `high_freq` found, the `decode_freqs()` function can be used to find the corresponding digit.
+That digit is printed out.
+
 == Signal Plot
 
 Finally, the program plots the entire signal over time and saves the figure to the desired `plot_name`.
