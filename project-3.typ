@@ -67,6 +67,25 @@ These variables include the following:
 - `sound_length`: how long each dual tone should last in milliseconds
 - `pause_length`: how long each pause should last in milliseconds
 
+== Signal Sample Amounts
+
+Then, the program calculates how many `sound_samples` and `pause_samples` are needed based on the `sampling_rate`, `sound_length`, and `pause_length`.
+If the `sampling_rate` is represented by $f_s$, then to get the time between samples $T_s$ is
+$
+T_s = 1/f_s
+$ <sampling_period_and_frequency>
+Thus, to find the number of samples $n$ needed for a duration $t$, the duration can be divided by the time between samples.
+$
+n = t/T_s = f_s t
+$ <time_to_sample>
+Note that the times in milliseconds were divided by 1000 to convert them to seconds.
+That way multiplying by the `sampling_rate` in Hz gives a unitless result.
+
+To go in reverse from sample number to time, you can rearrange @time_to_sample to get
+$
+t = T_s n = n/f_s
+$ <sample_to_time>
+
 #py_script("DTMFwrite", put_fname: true)
 
 = Decoding Program
