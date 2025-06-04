@@ -232,6 +232,8 @@ With the current encoding scheme, only digits (0--9) can be sent in messages.
 One might wish to expand the encoding and decoding programs to support messages containing more complicated information, such as letters and symbols.
 Let $C$ refer to the number of different characters available.
 
+== Adjusting the Number of High/Low Frequencies
+
 To start, notice that @digit_encoding_scheme has two unused frequency combinations.
 Those unused combinations could be used to add two more characters to the encoding scheme.
 The desired characters would be put in the `decode_matrix`.
@@ -245,6 +247,8 @@ $
 If the goal is to be able to send digits and uncased letters, then $26 + 10 = 36$ characters are needed and it is required that $n_1 n_2 >= 36$.
 One possible choice for $n_1$ and $n_2$ is $n_1 = n_2 = 6$.
 If the goal is to also include characters such as spaces, commas, and periods, then $n_1$ or $n_2$ can be increased to 7, giving 42 possible characters.
+
+== Mapping Character Sequences to Characters
 
 Another technique that could be used is mapping sequences of preliminary characters to different characters.
 Each frequency pair would correspond to a specific preliminary character as in the previous technique.
@@ -261,6 +265,8 @@ $
 If $n_1 = 4$ and $n_2 = 3$ as in the default scheme and $l = 2$, then that gives $(4 times 3)^2 = 144$ possible characters.
 That is more than enough to cover any of the 128 ASCII characters.
 This technique has the advantage of not requiring any new frequencies, thought it has the disadvantage of making messages $l$ times longer.
+
+== Utilizing Additional Pure Tones
 
 A third technique that could be used is introducing additional sets of frequencies, perhaps higher or lower than the current sets.
 If $k$ frequency sets are used in total, then each character in the message would consist of $k$ pure sinusoids.
