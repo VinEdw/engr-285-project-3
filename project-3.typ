@@ -172,7 +172,7 @@ The end result is a list of lists containing the data for each dual tone.
 The `calclulate_coefficient()` function executes a simple version of Fourier analysis on the signal data. 
 Its purpose is to measure how often a particular frequency is present in a DTMF tone.
 Its purpose is to approximate for a frequency $nu$ the cosine coefficient $a_nu$ and the sine coefficient $b_nu$.
-The function returns $sqrt(a_nu^2 + b_nu^2)$.
+The function returns $ sqrt(a_nu^2 + b_nu^2) $ <fourier_coefficient>
 
 The cosine coefficient is defined as
 $ a_nu = 2/T integral_0^T f(t) cos(2 pi nu t) d t $
