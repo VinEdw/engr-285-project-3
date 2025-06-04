@@ -215,6 +215,10 @@ These summations were implemented in the function to approximate the Fourier coe
 For the given signal segment, the function loops through all the sample points, adding up each of their contributions to the summation.
 Finally, these summations are added in quadrature and scaled by their common factor $2/N$.
 
+== `decode_freqs()`
+
+== Main Loop
+
 == Signal Plot
 
 Finally, the program plots the entire signal over time and saves the figure to the desired `plot_name`.
