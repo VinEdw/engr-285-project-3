@@ -40,9 +40,9 @@ For this project's objectives, only numbers 0 to 9 were used.
   ),
 ) <digit_encoding_scheme>
 
-This matrix represents the most common arrangement of a DTMF telephone keypad, with the fourth row often reserved for symbols and 0. 
-Pressing a key will send a superimposed combination of the low and high frequencies, where the sound of each dual-tone will play for a certain duration. 
-A receiver will decode each dual-tone by performing Fourier analysis and determine the two most prominent frequencies. 
+This matrix represents the most common arrangement of a DTMF telephone keypad, with the fourth row often reserved for symbols and 0.
+Pressing a key will send a superimposed combination of the low and high frequencies, where the sound of each dual-tone will play for a certain duration.
+A receiver will decode each dual-tone by performing Fourier analysis and determine the two most prominent frequencies.
 
 `DTMFfrequencies.py` stores lists containing the high and low frequencies.
 This allows the frequencies to be accessed in the reading and writing programs without duplication.
@@ -93,7 +93,7 @@ It creates data for a sine wave represented by the following:
 $
 f(t) = A sin(2 pi f t)
 $
-$A$ represents the amplitude of the wave. 
+$A$ represents the amplitude of the wave.
 For these pure tones, the `amplitude` was set to the `sound_level` divided by 2.
 This gives the dual tone an amplitude equal to the `sound_level`.
 `omega` in the function converts the frequency in Hz to its angular frequency in rad/s.
@@ -127,7 +127,7 @@ Finally, Python's `wave` and `struct` libraries were used to write the `sound_da
 Initially, various parameters describing the metadata of the `.wav` file were set.
 Next, the values in the `sound_data` were looped through, converted to binary, and written to the `.wav` file.
 
-This test `.wav` file created plays the tones for digits 0 through 9, with clear pauses in between each one. 
+This test `.wav` file created plays the tones for digits 0 through 9, with clear pauses in between each one.
 This same sample file is later used in the decoding program.
 
 #py_script("DTMFwrite", put_fname: true)
@@ -169,7 +169,7 @@ The end result is a list of lists containing the data for each dual tone.
 
 == `calculate_coefficient()`
 
-The `calclulate_coefficient()` function executes a simple version of Fourier analysis on the signal data. 
+The `calclulate_coefficient()` function executes a simple version of Fourier analysis on the signal data.
 Its purpose is to measure how often a particular frequency is present in a DTMF tone.
 Its purpose is to approximate for a frequency $nu$ the cosine coefficient $a_nu$ and the sine coefficient $b_nu$.
 The function returns $ sqrt(a_nu^2 + b_nu^2) $ <fourier_coefficient>
@@ -252,7 +252,7 @@ Let $C$ refer to the number of different characters available.
 To start, notice that @digit_encoding_scheme has two unused frequency combinations.
 Those unused combinations could be used to add two more characters to the encoding scheme.
 The desired characters would be put in the `decode_matrix`.
-But, there are still only $4 times 3 = 12$ frequency pairs, and thus characters available. 
+But, there are still only $4 times 3 = 12$ frequency pairs, and thus characters available.
 One technique to increase the number of characters available would be to increase the number of low frequencies and/or the number of high frequencies.
 These new frequencies would be added to the `low` and `high` frequency lists, and the size of the `decode_matrix` would be expanded to match the sizes of the frequency lists.
 If we use $n_1$ to refer to the number of low frequencies and $n_2$ to refer to the number of high frequencies, then number of characters available is
