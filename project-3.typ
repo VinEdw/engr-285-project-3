@@ -217,6 +217,10 @@ Finally, these summations are added in quadrature and scaled by their common fac
 
 == `decode_freqs()`
 
+The `decode_freqs()` function maps a low frequency and a high frequency to the corresponding digit.
+First the index of of the low frequency is found, followed by the index for the high frequency.
+Those indices are then used to select the digit from the `decode_matrix`.
+
 == Main Loop
 
 == Signal Plot
