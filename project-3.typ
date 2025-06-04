@@ -58,5 +58,54 @@ It was created by looping through the entries of the `decode_matrix`, searching 
 
 #py_script("DTMFread", put_fname: true)
 
-= Sending Alphanumeric Messages
+= Handling More Complicated Messages
 
+With the current encoding scheme, only digits (0-9) can be sent in messages.
+One might wish to expand the encoding and decoding programs to support messages containing more complicated information, such as letters and symbols.
+Let $C$ refer to the number of different characters available.
+
+To start, notice that @digit_encoding_scheme has two unused frequency combinations.
+Those unused combinations could be used to add two more characters to the encoding scheme.
+The desired characters would be put in the `decode_matrix`.
+But, there are still only $4 times 3 = 12$ frequency pairs, and thus characters available. 
+One technique to increase the number of characters available would be to increase the number of low frequencies and/or the number of high frequencies.
+These new frequencies would be added to the `low` and `high` frequency lists, and the size of the `decode_matrix` would be expanded to match the sizes of the frequency lists.
+If we use $n_1$ to refer to the number of low frequencies and $n_2$ to refer to the number of high frequencies, then number of characters available is
+$
+C = n_1 n_2
+$
+If the goal is to be able to send digits and uncased letters, then $26 + 10 = 36$ characters are needed and it is required that $n_1 n_2 >= 36$.
+One possible choice for $n_1$ and $n_2$ is $n_1 = n_2 = 6$.
+If the goal is to also include characters such as spaces, commas, and periods, then $n_1$ or $n_2$ can be increased to 7, giving 42 possible characters. 
+
+Another technique that could be used is mapping sequences of preliminary characters to different characters.
+Each frequency pair would correspond to a specific preliminary character as in the previous technique.
+Then, sequences of preliminary characters would be mapped to a final character.
+For example, a 4 followed by a 1 could map to `A`, a 4 followed by a 2 could map to `B`, and so on.
+The encoding program would need to be modified to have a function, dictionary, or matrix that maps message characters to sequences of preliminary characters.
+Those preliminary characters could then be encoding into the signal as before.
+The decoding program would function the same initially, turning signals into preliminary characters.
+Then, a function, dictionary, or matrix would be needed to map sequences of preliminary characters to message characters.
+Using sequences with a fixed length of $l$, the number of characters available is
+$
+C = (n_1 n_2)^l
+$
+If $n_1 = 4$ and $n_2 = 3$ as in the default scheme and $l = 2$, then that gives $(4 times 3)^2 = 144$ possible characters.
+That is more than enough to cover any of the 128 ASCII characters.
+This technique has the advantage of not requiring any new frequencies, thought it has the disadvantage of making messages $l$ times longer.
+
+A third technique that could be used is introducing additional sets of frequencies, perhaps higher or lower than the current sets.
+If $k$ frequency sets are used in total, then each character in the message would consist of $k$ pure sinusoids.
+In order for the combined signal to have a maximum amplitude equal to `sound_level`, the individual sinusoids would need their amplitude set equal to the `sound_level / k`.
+Next, each of these new frequency sets would need to have their list of frequencies stored in a variable.
+To make all these frequency lists easier to manage, perhaps they could be put in a list.
+That way, the program could loop over the frequencies in each frequency list.
+Lastly, the `decode_matrix` would then need to be expanded to have `k` dimensions with lengths corresponding to the number of frequencies in each frequency list.
+The number of characters available when using $k$ frequency sets each with length $n_i$ is
+$
+C = product_(i=1)^k n_i
+$
+If $k = 3$, $n_1 = 4$, $n_2 = 3$, and $n_3 = 3$, then that gives $4 times 3 times 3 = 36$ characters, enough to send digits and uncased letters.
+Similar to the first technique, this technique does not increase the length of the message, though it does require introducing new frequencies.
+However, not as many distinct frequencies need to be used as the first technique.
+While the first technique required $6 + 6 = 12$ frequencies to encode 36 characters, this technique requires $4 + 3 + 3 = 10$ frequencies to encode the same amount of characters.
