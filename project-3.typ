@@ -55,6 +55,18 @@ It was created by looping through the entries of the `decode_matrix`, searching 
 
 = Encoding Program
 
+`DTMFwrite.py` is used to create a `.wav` file that contains a sequence of DTMF signals separated by pauses for the entered digit sequence.
+
+The program starts by importing necessary packages.
+Next, there are multiple variables that the user is free to set to adjust the behavior of the script.
+These variables include the following:
+- `file_name`: file location to save the `.wav` file
+- `number_list`: list of digits to encode in the signal
+- `sample_rate`: frequency in Hz at which points should be sampled from a pure sinusoid
+- `sound_level`: amplitude of the sum of two sinusoids; note that this must fit within a 16 bit signed integer (between $-2^15$ and $2^15 - 1$)
+- `sound_length`: how long each dual tone should last in milliseconds
+- `pause_length`: how long each pause should last in milliseconds
+
 #py_script("DTMFwrite", put_fname: true)
 
 = Decoding Program
