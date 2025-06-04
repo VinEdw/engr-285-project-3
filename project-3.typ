@@ -167,6 +167,54 @@ The end result is a list of lists containing the data for each dual tone.
   image("media/TenDigitsPlot.svg"),
 ) <test_signal_plot>
 
+== `calculate_coefficient()`
+
+The `calclulate_coefficient()` function executes a simple version of Fourier analysis on the signal data. 
+Its purpose is to measure how often a particular frequency is present in a DTMF tone.
+Its purpose is to approximate for a frequency $nu$ the cosine coefficient $a_nu$ and the sine coefficient $b_nu$.
+The function returns $sqrt(a_nu^2 + b_nu^2)$.
+
+The cosine coefficient is defined as
+$ a_nu = 2/T integral_0^T f(t) cos(2 pi nu t) d t $
+and the sine coefficient is defined as
+$ b_nu = 2/T integral_0^T f(t) sin(2 pi nu t) d t $
+where $T$ is the period of the signal.
+However, $T$ is not known, only the signal duration is.
+The signal duration $D$ can be written as
+$
+D = n T + delta T
+$
+where $n$ is the number of complete periods completed and $delta T$ is the remaining time.
+Substituting that expression in place of $T$ in the integrals yields
+$ a_nu = 2/(n T + delta T) integral_0^(n T + delta T) f(t) cos(2 pi nu t) d t $
+and
+$ b_nu = 2/(n T + delta T) integral_0^(n T + delta T) f(t) sin(2 pi nu t) d t $
+Since the functions are periodic, the integrals can be rewritten as
+$ a_nu = 2/(n T + delta T) [ n integral_0^T f(t) cos(2 pi nu t) d t + integral_0^(delta T) f(t) cos(2 pi nu t) d t ] $
+and
+$ b_nu = 2/(n T + delta T) [ n integral_0^T f(t) sin(2 pi nu t) d t + integral_0^(delta T) f(t) sin(2 pi nu t) d t ] $
+If $n$ is very large, these integrals approach
+$ a_nu = 2/T integral_0^T f(t) cos(2 pi nu t) d t $
+and
+$ b_nu = 2/T integral_0^T f(t) sin(2 pi nu t) d t $
+Thus, the signal duration $D$ can be used in place of $T$, assuming that $n$ is sufficiently large.
+This assumption is reasonable due to the relatively high frequencies used for the pure tones.
+
+To approximate these integrals, a Riemann sum was used.
+Assuming the signals consist of a large number of $N$ samples with values $y_i$ and time between them $T_s$, the summations are
+$ a_nu approx 2/D sum_(i=0)^(N-1) y_i cos(2 pi nu i T_s) T_s $
+and
+$ b_nu approx 2/D sum_(i=0)^(N-1) y_i sin(2 pi nu i T_s) T_s $
+@sample_to_time was used to convert from sample number to time.
+Using @sampling_period_and_frequency to rewrite $T_s$, followed by pulling $T_s$ out of the summations, and using @time_to_sample to go from a duration $D$ to the number of samples $N$, the summations become
+$ a_nu approx 2/N sum_(i=0)^(N-1) y_i cos(2 pi nu i/f_s) $
+and
+$ b_nu approx 2/N sum_(i=0)^(N-1) y_i sin(2 pi nu i/f_s) $
+
+These summations were implemented in the function to approximate the Fourier coefficients.
+For the given signal segment, the function loops through all the sample points, adding up each of their contributions to the summation.
+Finally, these summations are added in quadrature and scaled by their common factor $2/N$.
+
 #py_script("DTMFread", put_fname: true)
 
 = Handling More Complicated Messages
