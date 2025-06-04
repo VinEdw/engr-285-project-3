@@ -86,6 +86,28 @@ $
 t = T_s n = n/f_s
 $ <sample_to_time>
 
+== Generating Pure Tones
+
+In order to generate a pure tone data for each frequency, the `create_pure_tone_data()` function was used.
+It creates data for a sine wave represented by the following:
+$
+f(t) = A sin(2 pi f t)
+$
+$A$ represents the amplitude of the wave. 
+For these pure tones, the `amplitude` was set to the `sound_level` divided by 2.
+This gives the dual tone an amplitude equal to the `sound_level`.
+`omega` in the function converts the frequency in Hz to its angular frequency in rad/s.
+$
+omega = 2 pi f
+$
+This step saves on a repeated calculation in the loop by storing $omega$ in a variable.
+The for-loop present in the function loops through every sample for the desired duration.
+To convert the sample number `x` to a time $t$, @sample_to_time was used.
+Lastly, the function returns the data in a Numpy array of 16 bit signed integers.
+
+Using the `create_pure_tone_data()` function, a dictionary comprehension was used to create a dictionary that maps each low and high frequency to its pure tone data.
+By pre-generating the data like this, the program does not have to calculate the same data multiple times for a frequency.
+
 #py_script("DTMFwrite", put_fname: true)
 
 = Decoding Program
