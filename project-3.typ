@@ -121,6 +121,15 @@ It was constructed by looping through each digit in `number_list`.
 Each digit's dual tone was added to `sound_data`, followed by a pause consisting of zeros repeated for the desired number of `pause_samples`.
 The result is a long sequence of tones and pauses, just like a phone dial tone.
 
+== Audio File
+
+Finally, Python's `wave` and `struct` libraries were used to write the `sound_data` to a `.wav` file.
+Initially, various parameters describing the metadata of the `.wav` file were set.
+Next, the values in the `sound_data` were looped through, converted to binary, and written to the `.wav` file.
+
+This test `.wav` file created plays the tones for digits 0 through 9, with clear pauses in between each one. 
+This same sample file is later used in the decoding program.
+
 #py_script("DTMFwrite", put_fname: true)
 
 = Decoding Program
