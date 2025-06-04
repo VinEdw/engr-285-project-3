@@ -283,3 +283,9 @@ If $k = 3$, $n_1 = 4$, $n_2 = 3$, and $n_3 = 3$, then that gives $4 times 3 time
 Similar to the first technique, this technique does not increase the length of the message, though it does require introducing new frequencies.
 However, not as many distinct frequencies need to be used as the first technique.
 While the first technique required $6 + 6 = 12$ frequencies to encode 36 characters, this technique requires $4 + 3 + 3 = 10$ frequencies to encode the same amount of characters.
+
+= Cover Image
+
+The following script was use to create the cover image.
+
+#py_script("fourier_transform_demo", put_fname: false, put_output: false)
