@@ -12,7 +12,8 @@ $(OUTPUT_DIR)/%.output: $(SCRIPT_DIR)/%.py
 	@mkdir -p media
 	python $< > $@
 
-# $(OUTPUT_DIR)/script_1.output: $(SCRIPT_DIR)/script_1.py
+$(OUTPUT_DIR)/DTMFwrite.output: $(SCRIPT_DIR)/DTMFfrequencies.py
+$(OUTPUT_DIR)/DTMFread.output: $(SCRIPT_DIR)/DTMFfrequencies.py
 
 .PHONY: clean
 clean: 
