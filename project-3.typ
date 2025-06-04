@@ -228,7 +228,7 @@ Note that @sample_to_time was used to convert sample number to time.
 
 = Handling More Complicated Messages
 
-With the current encoding scheme, only digits (0-9) can be sent in messages.
+With the current encoding scheme, only digits (0--9) can be sent in messages.
 One might wish to expand the encoding and decoding programs to support messages containing more complicated information, such as letters and symbols.
 Let $C$ refer to the number of different characters available.
 
