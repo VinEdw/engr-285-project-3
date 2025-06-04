@@ -114,6 +114,13 @@ Afterwards, a list was created to map each digit to its dual tone data.
 `encode_dict` was used from `DTMFfrequencies.py` to get the low and high frequencies corresponding to the each digit.
 The pure tone data for those component frequencies were then added together to get one dual tone signal for each digit.
 
+== Final Audio Data
+
+Then, the final audio data for each digit was stored in the `sound_data` list.
+It was constructed by looping through each digit in `number_list`.
+Each digit's dual tone was added to `sound_data`, followed by a pause consisting of zeros repeated for the desired number of `pause_samples`.
+The result is a long sequence of tones and pauses, just like a phone dial tone.
+
 #py_script("DTMFwrite", put_fname: true)
 
 = Decoding Program
