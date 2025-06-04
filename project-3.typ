@@ -45,8 +45,8 @@ A receiver will decode each dual-tone by performing Fourier analysis and determi
 This allows the frequencies to be accessed in the reading and writing programs without duplication.
 The `decode_matrix` stores the digit associated with each low and high frequency, similar to @digit_encoding_scheme.
 -1 was put in place of unused frequency combinations.
-The `encode_list` is an array that maps each digit to its corresponding frequency pair.
-It was created by looping through the entries of the `decode_matrix`, searching for values between 0 and 9, then saving the position's pair of frequencies in the list using the current digit as the index.
+The `encode_dict` is a dictionary that maps each digit to its corresponding frequency pair.
+It was created by looping through the entries of the `decode_matrix`, searching for values between 0 and 9, then saving the position's pair of frequencies in the dictionary using the current digit as the index.
 
 #py_script("DTMFfrequencies", put_fname: true, put_output: false)
 

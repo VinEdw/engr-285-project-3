@@ -34,7 +34,7 @@ pure_tone_data = {freq: create_pure_tone_data(freq) for freq in (freqs.low + fre
 # Create a list that maps digits to their corresponding dual tone
 tone_list = [[]] * 10
 for digit in range(10):
-    low_freq, high_freq = freqs.encode_list[digit]
+    low_freq, high_freq = freqs.encode_dict[digit]
     tone_list[digit] = (pure_tone_data[low_freq] + pure_tone_data[high_freq]).tolist()
 
 # Create a list with the tone and pause for each digit of the number list
