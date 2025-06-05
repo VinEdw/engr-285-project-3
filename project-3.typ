@@ -255,6 +255,8 @@ The desired characters would be put in the `decode_matrix`.
 But, there are still only $4 times 3 = 12$ frequency pairs, and thus characters available.
 One technique to increase the number of characters available would be to increase the number of low frequencies and/or the number of high frequencies.
 These new frequencies would be added to the `low` and `high` frequency lists, and the size of the `decode_matrix` would be expanded to match the sizes of the frequency lists.
+These additional frequencies would also need to be sufficiently spaced so that their bumps in the Fourier coefficient graph, as shown in @fourier_transfrom_demo, remain thin and do not overlap.
+The frequencies would also need to remain low enough such that they can still be sufficiently sampled by the sampling frequency; otherwise information about the signal could get lost.
 If we use $n_1$ to refer to the number of low frequencies and $n_2$ to refer to the number of high frequencies, then number of characters available is
 $
 C = n_1 n_2
